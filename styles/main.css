@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../assets/Back/grey-back.jpg");
+}
+
+header {
+    margin-top: 2.222vh;
+}
+
+.header_img {
+    display: flex;
+    justify-content: center;
+    height: 7vmax;
+}
+
+.header_img > img {
+    height: 100%;
+}
+
+.main-top {
+    min-height: 41.888vh;
+}
+
+.back_text {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: -10;
+}
+
+.back_text > h1 {
+    font-size: 15.222vw;
+    line-height: 30px;
+    margin-top: 80px;
+    color: var(--dark-green);
+    font-family: "Bebas Neue";
+}
+
+.front_image {
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 20vmax;
+    width: 50vmax;
+}
+
+.front_image > img {
+    height: 100%;
+    width: 100%;
+}
+
+.name_car {
+    display: flex;
+    justify-content: center;
+    font-size: 3vw;
+    line-height: 10px;
+    margin-top: 10px;
+    color: var(--salat);
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.name_car > h2 {
+    font-family: "Montserrat";
+}
+
+.characteristic {
+    margin: 0 auto;
+    width: 70%;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+
+    flex-wrap: wrap;
+}
+
+li:not(:last-child) {
+    margin-right: 10px;
+}
+
+li > p {
+    color: var(--crem-white);
+    font-family: "Roboto";
+    font-size: 1.5vw;
+    line-height: 1px;
+}
+
+.start_engine {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    height: 8vh;
+    width: 12vw;
+    border-radius: 10px;
+    background-color: var(--light-salat);
+    color: var(--but-dark-green);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    font-size: 1.2vw;
+    border: none;
+}
+
+button:hover {
+    background-color: var(--light-but-salat);
+}
