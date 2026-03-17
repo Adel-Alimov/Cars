@@ -1,9 +1,11 @@
 const butEngine = document.getElementById("engine");
 const nameCar = document.querySelector(".name_car");
 const characteristic = document.querySelector(".characteristic");
+const nameModel = document.querySelector(".back_text");
 
 class Car {
-    constructor(model, power, acceleration, price, transmission, color) {
+    constructor(name, model, power, acceleration, price, transmission, color) {
+        this._name = name;
         this._model = model;
         this._power = power;
         this._acceleration = acceleration;
@@ -32,6 +34,7 @@ class Car {
 
     displayInfo() {
         console.log(`Модель ${this._model}`);
+        console.log(`Название модели ${this._name}`);
         console.log(`Мощность: ${this._power}лс`);
         console.log(`Разгон от 0 до 100 ${this._acceleration}с`);
         console.log(`Начальная цена в долларах $${this._price.toLocaleString()}`);
@@ -42,6 +45,10 @@ class Car {
 
     getModel() {
         return `<h2>${this._model}</h2>`;
+    }
+
+    getName() {
+        return `<h1>${this._name}</h1>`;
     }
     getHTMLInfo() {
         let htmlStroke = `<ul>
@@ -66,8 +73,17 @@ class Car {
 }
 
 class BMW extends Car {
-    constructor(model, power, acceleration, price, transmission, color, mPerformance = false) {
-        super(model, power, acceleration, price, transmission, color);
+    constructor(
+        name,
+        model,
+        power,
+        acceleration,
+        price,
+        transmission,
+        color,
+        mPerformance = false,
+    ) {
+        super(name, model, power, acceleration, price, transmission, color);
         this._mPerformance = mPerformance;
     }
     displayInfo() {
@@ -89,9 +105,9 @@ class BMW extends Car {
 
 class BMWM4Competition extends BMW {
     constructor(color = "green", launchControl, soundEngine) {
-        super("BMW M4 Competition", 523, 3.4, 91500, "8-ступ.", color, true);
-        this._launch = true;
-        this._sound = "sounds/bmwSound.mp3";
+        super("M4 COMPETITION", "BMW M4 Competition", 523, 3.4, 91500, "8-ступ.", color, true);
+        this._launch = launchControl;
+        this._sound = soundEngine;
         if (typeof launchControl !== "boolean") {
             throw "Лаунч должен быть булевым";
         }
@@ -117,7 +133,7 @@ class BMWM4Competition extends BMW {
         return base.replace(
             "</ul>",
             `   <li>
-                        <p>лаунч контроль: ${this._launch ? "да" : "нет"}</p>
+                        <p>Лаунч контроль: ${this._launch ? "да" : "нет"}</p>
                     </li>
                 </ul>`,
         );
@@ -126,6 +142,7 @@ class BMWM4Competition extends BMW {
 
 let bmwM4 = new BMWM4Competition("зеленый", true, "sounds/bmwSound.mp3");
 if (nameCar) nameCar.innerHTML = bmwM4.getModel();
+if (nameModel) nameModel.innerHTML = bmwM4.getName();
 if (characteristic) characteristic.innerHTML = bmwM4.getHTMLInfo();
 
 butEngine.addEventListener("click", function () {
