@@ -175,6 +175,58 @@ class BMWM4Competition extends BMW {
     }
 }
 
+class BMWM5Competition extends BMW {
+    constructor(color = "blue", launchControl, soundEngine) {
+        super(
+            "M5 COMPETITION",
+            "BMW M5 Competition",
+            625,
+            3.4,
+            120000,
+            "8-ступ.",
+            color,
+            true,
+            "assets/Cars/M5.png",
+            "assets/logo/logoBMW.png",
+        );
+        this._launch = launchControl;
+        this._sound = soundEngine;
+        if (typeof launchControl !== "boolean") {
+            throw "Лаунч должен быть булевым";
+        }
+        if (typeof soundEngine !== "string") {
+            throw "Звук должен быть строкой";
+        }
+    }
+    displayInfo() {
+        console.log(`Лаунч контроль ${this._launch ? "Да" : "Нет"}`);
+        super.displayInfo();
+    }
+    soundEngine() {
+        let sound = new Audio("sounds/M5.mp3");
+        sound.volume = 1;
+        sound.currentTime = 0;
+        sound.play().catch((error) => {
+            console.error("Ошибка звук не запускается", error.message);
+        });
+        setTimeout(function () {
+            sound.pause();
+            sound.currentTime = 0;
+        }, 5000);
+    }
+
+    getHTMLInfo() {
+        let base = super.getHTMLInfo();
+        return base.replace(
+            "</ul>",
+            `   <li>
+                        <p>Лаунч контроль: ${this._launch ? "да" : "нет"}</p>
+                    </li>
+                </ul>`,
+        );
+    }
+}
+
 let bmwM4 = new BMWM4Competition("зеленый", true, "sounds/bmwSound.mp3");
 if (nameCar) nameCar.innerHTML = bmwM4.getModel();
 if (nameModel) nameModel.innerHTML = bmwM4.getName();
@@ -184,25 +236,25 @@ if (logo) logo.innerHTML = bmwM4.getLogo();
 
 butEngine.addEventListener("click", function () {
     bmwM4.soundEngine();
-    let photoChild = photo.childNodes[0];
-    if (photoChild.getElementsByTagName("img")) {
-        photoChild.setAttribute("class", "shake");
-        for (let i = 0; i < 10; i++) {
-            let smokeInterval = setInterval(function () {
-                let smoke = document.createElement("div");
-                smoke.classList.add("smoke");
-                smoke.style.right = `${5 + Math.random() * 10}%`;
-                smoke.style.bottom = `${10 + Math.random() * 10}%`;
-                smoke.style.height = `${20 + Math.random() * 150}px`;
-                smoke.style.width = `${20 + Math.random() * 150}px`;
-                photo.appendChild(smoke);
-            }, 100);
+    let img = photo.querySelector("img");
+    let smokes = [];
+    img.classList.add("shake");
+    let smokeInterval = setInterval(() => {
+        let smoke = document.createElement("div");
+        smoke.classList.add("smoke");
+        smoke.style.right = `${5 + Math.random() * 10}%`;
+        smoke.style.bottom = `${10 + Math.random() * 10}%`;
+        smoke.style.height = `${20 + Math.random() * 150}px`;
+        smoke.style.width = `${20 + Math.random() * 150}px`;
+        photo.appendChild(smoke);
+        smokes.push(smoke);
+    }, 10);
 
-            setTimeout(function () {
-                clearInterval(smokeInterval);
-                photoChild.setAttribute("class", "");
-                photo.removeChild(smoke);
-            }, 5000);
-        }
-    }
+    setTimeout(function () {
+        clearInterval(smokeInterval);
+        img.classList.remove("shake");
+    }, 5000);
+    setTimeout(function () {
+        smokes.forEach((smoke) => smoke.remove());
+    }, 8000);
 });

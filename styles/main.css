@@ -28,6 +28,21 @@ header {
     min-height: 41.888vh;
 }
 
+.buttons {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.arrow {
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    font-size: 20vw;
+    color: var(--crem-white);
+}
+
 .back_text {
     display: flex;
     justify-content: center;
@@ -103,7 +118,7 @@ li > p {
     justify-content: center;
 }
 
-button {
+#engine {
     height: 8vh;
     width: 12vw;
     border-radius: 10px;
@@ -115,7 +130,7 @@ button {
     border: none;
 }
 
-button:hover {
+#engine:hover {
     background-color: var(--light-but-salat);
     scale: 0.8;
 }
