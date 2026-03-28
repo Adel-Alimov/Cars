@@ -132,7 +132,7 @@ li > p {
 
 #engine:hover {
     background-color: var(--light-but-salat);
-    scale: 0.8;
+    scale: 1.25;
 }
 
 .shake {
